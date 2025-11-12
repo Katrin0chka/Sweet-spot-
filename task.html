@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Решение алгоритмической задачи</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fce8f0;
+      margin: 0;
+      color: #111;
+    }
+
+    nav {
+      background: #f4cadd;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: black;
+    }
+
+    nav a.active {
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 24px 0 10px;
+      color: #1A3397;
+    }
+
+    .wrap {
+      max-width: 850px;
+      margin: 0 auto 60px;
+      background: white;
+      padding: 30px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      border: 1px solid #d3bfc8;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .grid label {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .grid input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      border: 1px solid #bda5ad;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .grid input:focus {
+      border-color: #9e7b8c;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      background: #fff;
+      border: 1px solid #9e7b8c;
+      padding: 10px 15px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #f4cadd;
+    }
+
+    button.primary {
+      background: #1A3397;
+      color: white;
+      border-color: #1A3397;
+    }
+
+    .out {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px dashed #bda5ad;
+      background: #fff8fa;
+      font-size: 17px;
+    }
+
+    .ok {
+      color: #097a24;
+      font-weight: bold;
+    }
+
+    .warn {
+      color: #b25a00;
+      font-weight: bold;
+    }
+
+    .bad {
+      color: #c01c2e;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навигация -->
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="about.html">О нас</a>
+    <a href="forms.html">Формы</a>
+    <a href="passport.html">Паспорт</a>
+    <a href="task.html" class="active">Алгоритмическая задача</a>
+    <a href="https://mon-bon.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=np-ser-brendovaya_id-34679625&utm_content=10882596434&utm_term=---autotargeting&yclid=12603543915247697919">Сайт партнёра</a>
+  </nav>
+
+  <h1>Решение алгоритмической задачи</h1>
+
+  <div class="wrap">
+    <p>
+      Даны вещественные числа <b>A</b>, <b>B</b>, <b>C</b>.<br>
+      Определить, выполняется ли одно из неравенств:  
+      <code>A &lt; B &lt; C</code> или <code>A &lt; B &gt; C</code>,  
+      и какое именно неравенство выполняется.
+    </p>
+
+    <div class="grid">
+      <div>
+        <label for="a">A</label>
+        <input id="a" type="text" placeholder="Введите A">
+      </div>
+      <div>
+        <label for="b">B</label>
+        <input id="b" type="text" placeholder="Введите B">
+      </div>
+      <div>
+        <label for="c">C</label>
+        <input id="c" type="text" placeholder="Введите C">
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="primary" id="check">Проверить</button>
+      <button id="clear">Очистить</button>
+    </div>
+
+    <div class="out" id="out">
+      Введите числа и нажмите «Проверить».
+    </div>
+  </div>
+
+  <footer>© Sweet Spot | Проверка неравенств A, B, C</footer>
+
+  <script>
+    const $a = document.getElementById('a');
+    const $b = document.getElementById('b');
+    const $c = document.getElementById('c');
+    const $out = document.getElementById('out');
+
+    function toNum(val) {
+      if (!val) return NaN;
+      return Number(val.replace(',', '.'));
+    }
+
+    function check() {
+      const A = toNum($a.value);
+      const B = toNum($b.value);
+      const C = toNum($c.value);
+
+      if (isNaN(A) || isNaN(B) || isNaN(C)) {
+        $out.innerHTML = '<span class="bad">Ошибка:</span> введите корректные числа.';
+        return;
+      }
+
+      const cond1 = (A < B) && (B < C);
+      const cond2 = (A < B) && (B > C);
+
+      if (cond1) {
+        $out.innerHTML = `<span class="ok">Истина:</span> выполняется неравенство <b>A &lt; B &lt; C</b>.`;
+      } else if (cond2) {
+        $out.innerHTML = `<span class="warn">Истина:</span> выполняется неравенство <b>A &lt; B &gt; C</b>.`;
+      } else {
+        $out.innerHTML = `<span class="bad">Ни одно из неравенств не выполняется.</span>`;
+      }
+    }
+
+    document.getElementById('check').addEventListener('click', check);
+    document.getElementById('clear').addEventListener('click', () => {
+      $a.value = '';
+      $b.value = '';
+      $c.value = '';
+      $out.textContent = 'Введите числа и нажмите «Проверить».';
+    });
+
+    // Проверка по Enter
+    [$a, $b, $c].forEach(el => el.addEventListener('keydown', e => {
+      if (e.key === 'Enter') check();
+    }));
+  </script>
+</body>
+</html>

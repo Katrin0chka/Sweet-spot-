@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM_JS. Считываем информацию из DOM</title>
+  <style>
+    body{
+      background:#fce8f0;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+    h1{
+      text-align:center;
+      color:#1A3397;
+      margin:20px 0;
+    }
+
+    /* === контейнер сцены с фоном === */
+    .stage{
+      position:relative;
+      width:900px;         /* ширину можешь поменять, если фон большой */
+      margin:0 auto;
+    }
+
+    /* === фон паспорта === */
+    .stage .bg{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    /* === фото 3×4 === */
+    .photo{
+      position:absolute;
+      left:40px;      /* сдвиг по горизонтали */
+      top:795px;      /* сдвиг по вертикали */
+      width:258px;
+      height:300px;
+      object-fit:cover;
+      border:2px solid #c9b0b8;
+      border-radius:6px;
+      background:#fafafa;
+    }
+
+    /* === текстовые данные === */
+    #pas{
+      position:absolute;
+      inset:0;
+      font-size:32px;
+      color:#222;
+      line-height:1.1;
+    }
+    #pas p{ position:absolute; margin:0; }
+
+    /* первые три p технические, их почти не видно */
+    #pas .p1{ left:300px; top:130px; opacity:0.01; }
+    #pas .p2{ left:300px; top:180px; opacity:0.01; }
+    #pas .p3{ left:300px; top:230px; opacity:0.01; }
+
+    /* ФИО, дата, место — то, что видно */
+    #pas .p4{ left:450px; top:770px; }  /* Фамилия */
+    #pas .p5{ left:450px; top:830px; }  /* Имя */
+    #pas .p6{ left:450px; top:880px; } /* Отчество */
+    #pas .p7{ left:450px; top:960px; } /* Дата */
+    #pas .p8{ left:450px; top:1040px; } /* Место */
+  </style>
+</head>
+
+<body>
+
+  <nav style="background: #f4cadd; padding: 10px 0; text-align: center;">
+    <a href="index.html" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">Главная</a>
+    <a href="about.html" style="margin: 0 15px; text-decoration: none; color: black;">О нас</a>
+    <a href="forms.html" style="margin: 0 15px; text-decoration: none; color: black;">Формы</a>
+     <a href="passport.html" style="margin: 0 15px; text-decoration: none; color: black; font-weight: bold;">Паспорт</a>
+    <a href="task.html" style="margin: 0 15px; text-decoration: none; color: black;">Алгоритмическая задача</a>
+<a href="https://mon-bon.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=np-ser-brendovaya_id-34679625&utm_content=10882596434&utm_term=---autotargeting&yclid=12603543915247697919" style="margin: 0 15px; text-decoration: none; color: black;">Сайт партнёра</a>
+ 
+
+</nav>
+<!-- КНОПКА: Кириллица ↔ Латиница -->
+<div style="text-align:center; margin:16px 0;">
+  <button id="toggleTranslit"
+          style="padding:10px 16px; border-radius:8px; border:1px solid #bbb; cursor:pointer;">
+    Изменить на латиницу
+  </button>
+</div>
+
+<h1 style="color: black;">Паспорт</h1>
+
+
+
+
+  <!-- БЛОК ПАСПОРТА -->
+  <div class="stage">
+    <!-- фон разворота паспорта -->
+    <img class="bg" src="images/passport_bg.jpg" alt="Разворот паспорта">
+
+    <!-- фото -->
+    <img class="photo" src="images/pass_photo.jpg" alt="Фото 3x4">
+
+    <!-- текст поверх -->
+    <div id="pas">
+      <p class="p1">УВД РОССИИ</p>
+      <p class="p2">ПО КАНАТНОЙ ОБЛ</p>
+      <p class="p3">01.09.1991&nbsp;&nbsp;&nbsp;098-093</p>
+
+      <p class="p4"><span id="fam">Хертляйн</span></p>
+      <p class="p5"><span id="name">Екатерина</span></p>
+      <p class="p6"><span id="patr">Викторовна</span></p>
+      <p class="p7"><span id="dob">19.09.2006</span></p>
+      <p class="p8"><span id="pob">Г. Сочи</span></p>
+    </div>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Простой транслит
+  function translitRUtoLAT(str) {
+    const map = {
+      'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'E','Ж':'Zh','З':'Z','И':'I','Й':'Y',
+      'К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F',
+      'Х':'Kh','Ц':'Ts','Ч':'Ch','Ш':'Sh','Щ':'Shch','Ы':'Y','Э':'E','Ю':'Yu','Я':'Ya',
+      'Ь':'','Ъ':'',
+      'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y',
+      'к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f',
+      'х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch','ы':'y','э':'e','ю':'yu','я':'ya',
+      'ь':'','ъ':''
+    };
+    return str.split('').map(ch => map[ch] ?? ch).join('');
+  }
+
+  // Элементы страницы
+  const btn   = document.getElementById('toggleTranslit');
+  const fam   = document.getElementById('fam');
+  const name  = document.getElementById('name');
+  const patr  = document.getElementById('patr');
+  const dob   = document.getElementById('dob');
+
+  // Сохраняем оригиналы
+  const original = {
+    fam:  fam?.textContent ?? '',
+    name: name?.textContent ?? '',
+    patr: patr?.textContent ?? '',
+    dob:  dob?.textContent  ?? ''
+  };
+
+  let latinShown = false;
+
+  btn.addEventListener('click', function () {
+    if (!latinShown) {
+      if (fam)  fam.textContent  = translitRUtoLAT(original.fam);
+      if (name) name.textContent = translitRUtoLAT(original.name);
+      if (patr) patr.textContent = translitRUtoLAT(original.patr);
+      // Дату оставляем без изменений
+      latinShown = true;
+      this.textContent = 'Вернуть кириллицу';
+    } else {
+      if (fam)  fam.textContent  = original.fam;
+      if (name) name.textContent = original.name;
+      if (patr) patr.textContent = original.patr;
+      if (dob)  dob.textContent  = original.dob;
+
+      latinShown = false;
+      this.textContent = 'Изменить на латиницу';
+    }
+  });
+});
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fam  = document.getElementById('fam')?.textContent.trim();
+    const name = document.getElementById('name')?.textContent.trim();
+    const patr = document.getElementById('patr')?.textContent.trim();
+    const dob  = document.getElementById('dob')?.textContent.trim();
+    const year = (dob?.match(/\b(\d{4})\b/) || [,''])[1];
+    const place = document.getElementById('pob')?.textContent.trim();
+
+    
+    console.log('Фамилия:', fam);
+    console.log('Имя:', name);
+    console.log('Отчество:', patr);
+    console.log('Дата рождения:', dob);
+    console.log('Год рождения:', year);
+    console.log('Место рождения:', place);
+   
+  });
+</script>
+<h1 style="color: black;">DOM_JS. Считываем информацию из DOM</h1>
+
+<!-- Скрин консоли -->
+<div style="text-align:center; margin: 20px 0;">
+  <img src="images/console_screenshot.png" alt="Скрин консоли с данными из DOM" 
+       style="max-width: 900px; border: 2px solid #ccc; border-radius: 8px;">
+</div>
+
+
+</body>
+</html>
