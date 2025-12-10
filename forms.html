@@ -1,118 +1,548 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<title>The Sweet Spot — Формы</title>
-<style>
-  body{background:#ffe6f2;margin:0;font-family:Arial,sans-serif;color:#000;text-align:center}
-  header{background:#f8c8dc;padding:10px}
-  nav.main a{color:#000;text-decoration:none;padding:8px 10px;font-size:18px}
-  nav.main{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .active{font-weight:bold;color:red}
-  form{display:inline-block;text-align:left;background:#fff;padding:16px;margin:12px;border:1px solid #ccc;border-radius:6px}
-  label{display:block;margin:8px 0}
-  input, select, textarea{width:280px;max-width:90%}
-  .note{font-size:12px;color:#333}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Sweet Spot — Формы заказа</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-KyZXEJaoQ1ao4i5Eq4L3MStNiM8tPMo2zIeoOxlPMuAMKjA7dvnmoC3Z4tB+zm8Z" 
+        crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  
+  <!-- Стили -->
+  <style>
+    body {
+      background: #ffe6f2;
+      font-family: Arial, sans-serif;
+      color: #000;
+      padding-top: 20px;
+    }
+    
+    /* Новая шапка - Вариант 2 */
+    .simple-nav {
+      background: #f8c8dc;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    
+    .nav-header {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: #d63384;
+    }
+    
+    .logo-link img {
+      margin-right: 15px;
+      border-radius: 8px;
+    }
+    
+    .logo-link h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    
+    .nav-main {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .nav-item {
+      padding: 8px 20px;
+      background: white;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .nav-item:hover {
+      background: #e8bacc;
+      transform: translateY(-2px);
+    }
+    
+    .nav-item.active {
+      background: #d63384;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .nav-item.partner {
+      background: #ffd166;
+      color: #333;
+    }
+    
+    /* Остальные стили */
+    main {
+      padding: 40px 0;
+    }
+    
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+      border: 1px solid #e8bacc;
+    }
+    
+    h1, h2 {
+      color: #d63384;
+      margin-bottom: 30px;
+    }
+    
+    .btn-custom {
+      background-color: #f8c8dc;
+      color: #333;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .btn-custom:hover {
+      background-color: #e8bacc;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .form-label {
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    
+    .form-control, .form-select {
+      border: 1px solid #e8bacc;
+      border-radius: 8px;
+      padding: 10px 15px;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: #f8c8dc;
+      box-shadow: 0 0 0 0.25rem rgba(248, 200, 220, 0.25);
+    }
+    
+    fieldset {
+      border: 1px solid #e8bacc;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: rgba(248, 200, 220, 0.1);
+    }
+    
+    legend {
+      color: #d63384;
+      font-weight: bold;
+      padding: 0 10px;
+      width: auto;
+      font-size: 1.1rem;
+    }
+    
+    .form-check-input:checked {
+      background-color: #f8c8dc;
+      border-color: #f8c8dc;
+    }
+    
+    .back-to-top {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #f8c8dc;
+      color: #333;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    
+    .back-to-top:hover {
+      background: #e8bacc;
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+    
+    footer {
+      background: #f8c8dc;
+      color: #333;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 40px;
+    }
+    
+    /* Адаптивность шапки */
+    @media (max-width: 992px) {
+      .logo-link h2 {
+        font-size: 1.3rem;
+      }
+      
+      .nav-item {
+        padding: 7px 15px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .logo-link {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo-link img {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      
+      .logo-link h2 {
+        font-size: 1.2rem;
+      }
+      
+      .nav-main {
+        gap: 8px;
+      }
+      
+      .nav-item {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .simple-nav {
+        padding: 10px 0;
+      }
+      
+      .logo-link h2 {
+        font-size: 1rem;
+      }
+      
+      .nav-main {
+        gap: 5px;
+      }
+      
+      .nav-item {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+        border-radius: 5px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar-nav {
+        text-align: center;
+        padding: 10px 0;
+      }
+      
+      .nav-link {
+        margin: 5px 0;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .form-container {
+        padding: 20px;
+      }
+      
+      fieldset {
+        padding: 15px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .form-container {
+        padding: 15px;
+      }
+      
+      .btn-custom {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
-<body>
 
-<header id="top">
-<nav class="main" style="background:#f8c8dc;padding:10px;text-align:center">
+<body id="top">
+  <!-- Новая шапка - Вариант 2 -->
+  <nav class="simple-nav">
+    <div class="container">
+      <!-- Первая строка: логотип -->
+      <div class="nav-header">
+        <a href="index.html" class="logo-link">
+          <img src="logo.png" alt="Лого" height="35">
+          <h2>The Sweet Spot — Кондитерская</h2>
+        </a>
+      </div>
+      
+      <!-- Вторая строка: навигация -->
+      <div class="nav-main">
+        <a href="index.html" class="nav-item">Главная</a>
+        <a href="about.html" class="nav-item">О нас</a>
+        <a href="catalog.html" class="nav-item">Каталог</a>
+        <a href="forms.html" class="nav-item active">Формы</a>
+        <a href="https://mon-bon.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=np-ser-brendovaya_id-34679625&utm_content=10882596434&utm_term=---autotargeting&yclid=12603543915247697919" 
+           target="_blank" class="nav-item partner">Партнёр</a>
+      </div>
+    </div>
+  </nav>
 
- <a href="index.html" title="На главную">
-  <img src="logo.png" alt="Лого"
-       style="height:32px; vertical-align:middle; border-radius:8px;">
-</a>
+  <main class="container">
+    <h1 class="text-center">Формы заказа</h1>
+    <p class="text-center mb-5">Заполните форму для оформления заказа или связи с нами</p>
 
+    <!-- Первая форма (Личные данные) -->
+    <div class="form-container">
+      <form action="https://www.bing.com/search" method="get" target="_blank">
+        <h2 class="text-center mb-4">
+          <i class="bi bi-person-circle me-2"></i>Личные данные
+        </h2>
 
-  <a href="index.html">Главная</a>
-  <a href="about.html">О нас</a>
-  <a href="forms.html" class="active">Формы</a>
-<a href="passport.html">Паспорт</a>
-<a href="task.html">Алгоритмическая задача</a>
-<a href="https://mon-bon.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=np-ser-brendovaya_id-34679625&utm_content=10882596434&utm_term=---autotargeting&yclid=12603543915247697919" target="_blank" rel="noopener">Сайт партнёра</a>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Фамилия *</label>
+            <input type="text" name="surname" class="form-control" value="Хертляйн" required>
+          </div>
 
-</nav>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Имя *</label>
+            <input type="text" name="name" class="form-control" value="Екатерина" required>
+          </div>
+        </div>
 
-</header>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Группа *</label>
+            <input type="text" name="group" class="form-control" value="БК-2412" required>
+          </div>
 
-<h1>Формы (отправка на удалённый сервер)</h1>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Мобильный телефон *</label>
+            <input type="tel" name="phone" class="form-control" value="+7 900 000-00-00" required>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Электронная почта *</label>
+            <input type="email" name="email" class="form-control" value="ekhertliain@edu.hse.ru" required>
+          </div>
 
-<form action="https://www.bing.com/search" method="get" target="_blank">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Дата отправки сообщения *</label>
+            <input type="date" name="date" class="form-control" value="2025-11-05" required>
+          </div>
+        </div>
 
+        <div class="mb-3">
+          <label class="form-label">Сообщение или комментарий</label>
+          <textarea name="message" class="form-control" rows="3" placeholder="Дополнительные пожелания..."></textarea>
+        </div>
 
-<h2>Личные данные</h2>
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-custom me-3">
+            <i class="bi bi-send me-2"></i>Отправить данные
+          </button>
+          <button type="reset" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-clockwise me-2"></i>Очистить
+          </button>
+        </div>
+      </form>
+    </div>
 
-<label>Фамилия</label>
-<input type="text" name="surname" value="Хертляйн" required>
+    <!-- Вторая форма (Заказ десертов) -->
+    <div class="form-container">
+      <form action="https://www.bing.com/search" method="get" target="_blank">
+        <h2 class="text-center mb-4">
+          <i class="bi bi-cart4 me-2"></i>Заказ десертов
+        </h2>
 
-<label>Имя</label>
-<input type="text" name="name" value="Екатерина" required>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Название десерта *</label>
+            <input type="text" name="product_name" class="form-control" value="Торт «Ягодный мусс»" required>
+          </div>
 
-<label>Группа</label>
-<input type="text" name="group" value="БК-2412" required>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Количество (шт) *</label>
+            <input type="number" name="qty" class="form-control" value="1" min="1" max="10" required>
+          </div>
+        </div>
 
-<label>Мобильный телефон</label>
-<input type="text" name="phone" value="+7 900 000-00-00" required>
+        <fieldset class="mb-4">
+          <legend>Выберите размер</legend>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="size" id="size1kg" value="1kg" checked>
+                <label class="form-check-label" for="size1kg">
+                  1 кг (на 8-10 человек)
+                </label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="size" id="size2kg" value="2kg">
+                <label class="form-check-label" for="size2kg">
+                  2 кг (на 15-20 человек)
+                </label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="size" id="size3kg" value="3kg">
+                <label class="form-check-label" for="size3kg">
+                  3 кг (на 25-30 человек)
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
 
-<label>Электронная почта</label>
-<input type="email" name="email" value="ekhertliain@edu.hse.ru" required>
+        <fieldset class="mb-4">
+          <legend>Дополнительные опции</legend>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="extra_berries" id="extra_berries" checked>
+                <label class="form-check-label" for="extra_berries">
+                  Дополнительные ягоды (+300 руб)
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="choco_drip" id="choco_drip">
+                <label class="form-check-label" for="choco_drip">
+                  Шоколадный дрип (+500 руб)
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="personal_message" id="personal_message">
+                <label class="form-check-label" for="personal_message">
+                  Персональная надпись (+200 руб)
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="special_packaging" id="special_packaging">
+                <label class="form-check-label" for="special_packaging">
+                  Праздничная упаковка (+400 руб)
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
 
-<label>Дата отправки сообщения</label>
-<input type="date" name="date" value="2025-11-05" required>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Дата получения *</label>
+            <input type="date" name="pickup_date" class="form-control" value="2025-11-10" required>
+          </div>
 
-<button type="submit">Отправить</button>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Время получения</label>
+            <select name="pickup_time" class="form-select">
+              <option value="10-12">10:00 - 12:00</option>
+              <option value="12-14">12:00 - 14:00</option>
+              <option value="14-16">14:00 - 16:00</option>
+              <option value="16-18">16:00 - 18:00</option>
+              <option value="18-20">18:00 - 20:00</option>
+            </select>
+          </div>
+        </div>
 
-</form>
+        <div class="mb-3">
+          <label class="form-label">Пароль для подтверждения заказа</label>
+          <input type="password" name="confirm_password" class="form-control" value="12345" placeholder="Введите пароль">
+          <div class="form-text">Пароль будет отправлен на вашу электронную почту</div>
+        </div>
 
+        <div class="mb-3">
+          <label class="form-label">Особые пожелания к заказу</label>
+          <textarea name="special_requests" class="form-control" rows="3" placeholder="Аллергии, диетические ограничения, особенности дизайна..."></textarea>
+        </div>
 
+        <input type="hidden" name="order_source" value="website_form">
 
-<form action="https://www.bing.com/search" method="get" target="_blank">
-  <h2>Заказ десертов</h2>
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-custom me-3">
+            <i class="bi bi-bag-check me-2"></i>Оформить заказ
+          </button>
+          <button type="reset" class="btn btn-outline-secondary">
+            <i class="bi bi-x-circle me-2"></i>Сбросить форму
+          </button>
+        </div>
+      </form>
+    </div>
 
- 
-  <label>Название десерта
-    <input type="text" name="product_name" value="Торт «Ягодный мусс»" required>
-  </label>
+    <div class="text-center mt-4">
+      <a href="#top" class="back-to-top">
+        <i class="bi bi-arrow-up"></i> К началу страницы
+      </a>
+    </div>
+  </main>
 
- 
-  <label>Количество (шт)
-    <input type="number" name="qty" value="1" min="1" max="10" required>
-  </label>
+  <!-- Футер -->
+  <footer>
+    <div class="container">
+      <p>© 2023 The Sweet Spot — Кондитерская. Все права защищены.</p>
+      <p>Телефон: +7 (900) 000-00-00 | Email: info@sweet-spot.ru</p>
+      <p>
+        <a href="index.html" class="text-decoration-none text-dark me-3">Главная</a>
+        <a href="about.html" class="text-decoration-none text-dark me-3">О нас</a>
+        <a href="catalog.html" class="text-decoration-none text-dark me-3">Каталог</a>
+        <a href="forms.html" class="text-decoration-none text-dark">Формы заказа</a>
+      </p>
+    </div>
+  </footer>
 
- 
-  <fieldset style="border:none;padding:0;margin:8px 0">
-    <legend>Размер</legend>
-    <label><input type="radio" name="size" value="1kg" checked> 1 кг</label>
-    <label><input type="radio" name="size" value="2kg"> 2 кг</label>
-  </fieldset>
-
-
-  <fieldset style="border:none;padding:0;margin:8px 0">
-    <legend>Дополнительно</legend>
-    <label><input type="checkbox" name="extra_berries" checked> Доп. ягоды</label>
-    <label><input type="checkbox" name="choco_drip"> Шоколадный дрип</label>
-  </fieldset>
-
-  <label>Дата получения
-    <input type="date" name="pickup_date" value="2025-11-10" required>
-  </label>
-
-  
-  <label>Пароль для подтверждения (пример)
-    <input type="password" name="confirm_password" value="12345">
-  </label>
-
- 
-  <input type="hidden" name="order_source" value="site">
-
-  <button type="submit">Оформить заказ</button>
-  
-</form>
-
-<p><a href="#top">К началу </a></p>
-
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
+          crossorigin="anonymous"></script>
+          
+  <!-- Плавная прокрутка -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>

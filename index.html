@@ -1,223 +1,510 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>The Sweet Spot — Главная</title>
-<style>
-  body{background:#ffe6f2;margin:0;font-family:Arial,sans-serif;color:#000}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Sweet Spot — Главная</title>
   
-  nav.main{background:#f8c8dc;padding:10px;text-align:center}
-  nav.main a{color:#000;text-decoration:none;margin:0 8px}
-  .active{font-weight:bold;color:red}
-
-
-  nav.local{padding:10px;text-align:center}
-  nav.local a{color:#000;text-decoration:none;margin:0 8px}
-
- 
-  main{max-width:800px;margin:0 auto;padding:16px}
-  section{min-height:50vh; padding:16px 8px; border-bottom:1px solid #e8bacc; scroll-margin-top:16px}
-  h1,h2{margin:8px 0}
-
-  .content{max-width:620px;margin:0 auto; text-align:left}
-  ol,ul{padding-left:1.4em; margin:0 0 1em}
-</style>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-KyZXEJaoQ1ao4i5Eq4L3MStNiM8tPMo2zIeoOxlPMuAMKjA7dvnmoC3Z4tB+zm8Z" 
+        crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  
+  <!-- Стили -->
+  <style>
+    body {
+      background: #ffe6f2;
+      font-family: Arial, sans-serif;
+      color: #000;
+      padding-top: 20px;
+    }
+    
+    /* Новая шапка - Вариант 2 */
+    .simple-nav {
+      background: #f8c8dc;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    
+    .nav-header {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: #d63384;
+    }
+    
+    .logo-link img {
+      margin-right: 15px;
+      border-radius: 8px;
+    }
+    
+    .logo-link h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    
+    .nav-main {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .nav-item {
+      padding: 8px 20px;
+      background: white;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .nav-item:hover {
+      background: #e8bacc;
+      transform: translateY(-2px);
+    }
+    
+    .nav-item.active {
+      background: #d63384;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .nav-item.partner {
+      background: #ffd166;
+      color: #333;
+    }
+    
+    /* Остальные стили */
+    .btn-custom {
+      background-color: #f8c8dc;
+      color: #333;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .btn-custom:hover {
+      background-color: #e8bacc;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    main {
+      padding: 20px 0;
+    }
+    
+    section {
+      padding: 40px 0;
+      border-bottom: 1px solid #e8bacc;
+    }
+    
+    h1, h2, h3 {
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+    
+    .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      margin-bottom: 20px;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .card-title {
+      color: #d63384;
+      font-weight: bold;
+    }
+    
+    .local-nav {
+      background: rgba(255,255,255,0.9);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .local-nav a {
+      color: #d63384;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: 500;
+    }
+    
+    .local-nav a:hover {
+      text-decoration: underline;
+    }
+    
+    .filling-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 15px;
+      padding: 20px;
+      height: 100%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .filling-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    
+    footer {
+      background: #f8c8dc;
+      color: #333;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 40px;
+    }
+    
+    .bakery-img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      margin: 15px auto;
+      display: block;
+    }
+    
+    .bakery-img:hover {
+      transform: scale(1.03);
+    }
+    
+    /* Адаптивность шапки */
+    @media (max-width: 992px) {
+      .logo-link h2 {
+        font-size: 1.3rem;
+      }
+      
+      .nav-item {
+        padding: 7px 15px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .logo-link {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo-link img {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      
+      .logo-link h2 {
+        font-size: 1.2rem;
+      }
+      
+      .nav-main {
+        gap: 8px;
+      }
+      
+      .nav-item {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .simple-nav {
+        padding: 10px 0;
+      }
+      
+      .logo-link h2 {
+        font-size: 1rem;
+      }
+      
+      .nav-main {
+        gap: 5px;
+      }
+      
+      .nav-item {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+        border-radius: 5px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      section {
+        padding: 30px 0;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .btn-custom {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      
+      .card-img-top {
+        height: 180px;
+      }
+    }
+  </style>
 </head>
-<body>
 
+<body id="top">
+  <!-- Новая шапка - Вариант 2 -->
+  <nav class="simple-nav">
+    <div class="container">
+      <!-- Первая строка: логотип -->
+      <div class="nav-header">
+        <a href="index.html" class="logo-link">
+          <img src="logo.png" alt="Лого" height="35">
+          <h2>The Sweet Spot — Кондитерская</h2>
+        </a>
+      </div>
+      
+      <!-- Вторая строка: навигация -->
+      <div class="nav-main">
+        <a href="index.html" class="nav-item active">Главная</a>
+        <a href="about.html" class="nav-item">О нас</a>
+        <a href="catalog.html" class="nav-item">Каталог</a>
+        <a href="forms.html" class="nav-item">Формы</a>
+        <a href="https://mon-bon.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=np-ser-brendovaya_id-34679625&utm_content=10882596434&utm_term=---autotargeting&yclid=12603543915247697919" 
+           target="_blank" class="nav-item partner">Партнёр</a>
+      </div>
+    </div>
+  </nav>
 
-<div id="top"></div>
-
-
-<nav class="main" style="background:#f8c8dc;padding:10px;text-align:center">
-
-<a href="index.html" title="На главную">
-  <img src="logo.png" alt="Лого"
-       style="height:32px; vertical-align:middle; border-radius:8px;">
-</a>
-
-
-  <a href="index.html" class="active">Главная</a>
-  <a href="about.html">О нас</a>
-  <a href="forms.html">Формы</a>
- <a href="passport.html">Паспорт</a>
-<a href="task.html">Алгоритмическая задача</a>
-
-
-
-
-  <a href="https://mon-bon.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=np-ser-brendovaya_id-34679625&utm_content=10882596434&utm_term=---autotargeting&yclid=12603543915247697919" target="_blank" rel="noopener">Сайт партнёра</a>
-
-</nav>
-
-
-
-
-<nav class="local">
-  <a href="#sec1">Кондитерские изделия</a> |
-  <a href="#sec2">Почему выбирают нас</a> |
-  <a href="#sec3">Начинки</a> |
-  <a href="#top">К началу </a>
-</nav>
-<h2 style="text-align:center; margin-top:10px; font-family:'Arial', sans-serif; font-weight:600;">
-  Sweet spot — Кондитерская
-</h2>
-
-
-
-<main>
-
-<section id="sec1">
-  <h2>Кондитерские изделия</h2>
-  <div class="content">
-    <h3>Торты</h3>
-    <div style="display: flex; gap: 10px;">
-  <img src="https://i.pinimg.com/1200x/e7/1c/86/e71c86e3067874292545adf76d469849.jpg" width="200" >
-  <img src="https://i.pinimg.com/1200x/60/b6/8d/60b68d3817400c9e67664f919e2e6d28.jpg" width="200" >
-</div>
-    <h3>Кексы</h3>
-    <div style="display: flex; gap: 10px;">
-  <img src="https://i.pinimg.com/736x/58/91/8d/58918d890d84065e2d7a4f4a7bc5a3a8.jpg" width="200" >
-  <img src="https://i.pinimg.com/1200x/1a/14/5e/1a145eaeb76fb8ef20e51ad1ae61ceef.jpg" width="200" >
-</div>
-    <h3>Эклеры</h3>
-     <div style="display: flex; gap: 10px;">
-  <img src="https://i.pinimg.com/736x/c1/6c/c5/c16cc5ac47230070eb3c40de762abe5e.jpg" width="200" >
-  <img src="https://i.pinimg.com/736x/01/bd/42/01bd42f7f08b38eee8228b09aaa9ff3c.jpg" width="200" >
-</div>
-<h4>Виды изделий:</h4>
-<ol>
-  <li>Торты
-    <ul>
-      <li>Бенто-торты</li>
-      <li>Свадебные торты</li>
-      <li>Праздничные торты</li>
-    </ul>
-  </li>
-
-  <li>Кексы
-    <ul>
-      <li>Домашние классические кексы</li>
-      <li>Кексы с декором</li>
-    </ul>
-  </li>
-
-  <li>Эклеры
-    <ul>
-      <li>Классические сладкие эклеры</li>
-      <li>ПП эклеры</li>
-    </ul>
-  </li>
-</ol>
-
-  <p style="text-align:center;"><a href="#top">К началу </a></p>
-</section>
-
-
-
-<section id="sec2">
-  <h2>Почему выбирают нас</h2>
-  <div class="content">
-    <p>Наши преимущества:</p>
-    <ul>
-      <li>Натуральные ингредиенты</li>
-      <li>Нежные и лёгкие кремы</li>
-      <li>Индивидуальный дизайн</li>
-      <li>Доставка по городу</li>
-    </ul>
-    <h3>Наша кондитерская</h3>
-<p>Нажмите на миниатюру, чтобы увидеть интерьер:</p>
-
-<a href="https://i.pinimg.com/1200x/03/c3/d8/03c3d8af9ab3304d77fffa40bef1f5f6.jpg" target="_blank">
-  <img src="https://i.pinimg.com/1200x/03/c3/d8/03c3d8af9ab3304d77fffa40bef1f5f6.jpg" width="100" alt="Миниатюра кондитерской"
-       >
-</a>
-
+  <!-- Внутренняя навигация -->
+  <div class="container">
+    <div class="local-nav">
+      <a href="#sec1">Кондитерские изделия</a> |
+      <a href="#sec2">Почему выбирают нас</a> |
+      <a href="#sec3">Начинки</a> |
+      <a href="#top">К началу</a>
+    </div>
   </div>
-  <p style="text-align:center;"><a href="#top">К началу </a></p>
-</section>
 
+  <main class="container">
+    <!-- Заголовок -->
+    <div class="text-center mb-5">
+      <h1 class="display-4" style="color: #d63384;">Sweet Spot — Кондитерская</h1>
+      <p class="lead">Десерты, которые делают жизнь слаще</p>
+    </div>
 
+    <!-- Секция 1: Кондитерские изделия -->
+    <section id="sec1">
+      <h2 class="text-center mb-4">Кондитерские изделия</h2>
+      <div class="row">
+        <!-- Карточка 1 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card">
+            <img src="https://i.pinimg.com/1200x/e7/1c/86/e71c86e3067874292545adf76d469849.jpg" 
+                 class="card-img-top" alt="Кекс">
+            <div class="card-body">
+              <h5 class="card-title">Торты на заказ</h5>
+              <p class="card-text">Нежные и воздушные торты с различными начинками и индивидуальным дизайном.</p>
+              <a href="catalog.html#cakes" class="btn btn-custom">Смотреть в каталоге</a>
+            </div>
+          </div>
+        </div>
 
-<section id="sec3">
-  <h2>Начинки</h2>
+        <!-- Карточка 2 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card">
+            <img src="https://i.pinimg.com/736x/c1/6c/c5/c16cc5ac47230070eb3c40de762abe5e.jpg" 
+                 class="card-img-top" alt="Эклер">
+            <div class="card-body">
+              <h5 class="card-title">Эклеры и пирожные</h5>
+              <p class="card-text">Классические эклеры с кремом и ягодами, а также другие изысканные пирожные.</p>
+              <a href="catalog.html#desserts" class="btn btn-custom">Смотреть в каталоге</a>
+            </div>
+          </div>
+        </div>
 
-  <h3>Наши начинки</h3>
+        <!-- Карточка 3 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card">
+            <img src="https://i.pinimg.com/1200x/60/b6/8d/60b68d3817400c9e67664f919e2e6d28.jpg" 
+                 class="card-img-top" alt="Торт">
+            <div class="card-body">
+              <h5 class="card-title">Праздничные торты</h5>
+              <p class="card-text">Индивидуальные торты для особых событий: дни рождения, свадьбы, корпоративы.</p>
+              <a href="forms.html" class="btn btn-custom">Заказать</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="#top" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-up"></i> К началу
+        </a>
+      </div>
+    </section>
 
-  <table border="1" cellpadding="8" width="100%"
-  style="
-  background-image: url('https://i.pinimg.com/736x/10/4a/fe/104afe81c4f87931cc0d29ec49003b7b.jpg');
-  background-size: cover;
-  background-position: center;
-  border-collapse: collapse;
-  text-align:center;
-  font-size: 18px;
-  font-weight: bold;
-  ">
-    <tr style="background: rgba(255,255,255,0.7);">
-      <th>Начинка</th>
-      <th>Фото</th>
-      <th>Описание</th>
-      <th>Оформить заказ</th>
-    </tr>
+    <!-- Секция 2: Почему выбирают нас -->
+    <section id="sec2">
+      <h2 class="text-center mb-4">Почему выбирают нас</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="content">
+            <p class="lead">Наши преимущества:</p>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Натуральные ингредиенты</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Нежные и лёгкие кремы</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Индивидуальный дизайн</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Доставка по городу</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Ручная работа</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Гарантия качества</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <h3>Наша кондитерская</h3>
+          <p>Нажмите на фото, чтобы увидеть интерьер в полном размере:</p>
+          <a href="https://i.pinimg.com/1200x/03/c3/d8/03c3d8af9ab3304d77fffa40bef1f5f6.jpg" target="_blank" class="d-block">
+            <img src="https://i.pinimg.com/1200x/03/c3/d8/03c3d8af9ab3304d77fffa40bef1f5f6.jpg" 
+                 class="bakery-img img-fluid" alt="Интерьер кондитерской">
+          </a>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="#top" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-up"></i> К началу
+        </a>
+      </div>
+    </section>
 
-    <tr style="background: rgba(255,255,255,0.7);">
-      <td>Шоколадная</td>
-      <td><img src="https://i.pinimg.com/1200x/c2/d9/cf/c2d9cf69a148a6724afdd06e1afd47a0.jpg" width="120" alt="шоколад"></td>
-      <td>Насыщенный шоколад и нежный крем</td>
-      <td>
-  <a href="forms.html" style="color:#c04; text-decoration:underline;">
-    Заказать
-  </a>
-</td>
+    <!-- Секция 3: Начинки (адаптивные карточки вместо таблицы) -->
+    <section id="sec3">
+      <h2 class="text-center mb-4">Популярные начинки</h2>
+      
+      <div class="row">
+        <!-- Начинка 1 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="filling-card">
+            <img src="https://i.pinimg.com/1200x/c2/d9/cf/c2d9cf69a148a6724afdd06e1afd47a0.jpg" 
+                 class="filling-img" alt="Шоколадная начинка">
+            <h5>Шоколадная</h5>
+            <p>Насыщенный шоколад и нежный крем из бельгийского шоколада.</p>
+            <a href="forms.html" class="btn btn-custom w-100">Заказать</a>
+          </div>
+        </div>
 
-    </tr>
+        <!-- Начинка 2 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="filling-card">
+            <img src="https://i.pinimg.com/1200x/dc/29/92/dc2992abf1fb77ed5b10767505cc9328.jpg" 
+                 class="filling-img" alt="Ванильная начинка">
+            <h5>Ванильная</h5>
+            <p>Лёгкая сливочная ваниль, нежная и воздушная с натуральной ванилью.</p>
+            <a href="forms.html" class="btn btn-custom w-100">Заказать</a>
+          </div>
+        </div>
 
-    <tr style="background: rgba(255,255,255,0.7);">
-      <td>Ванильная</td>
-      <td><img src="https://i.pinimg.com/1200x/dc/29/92/dc2992abf1fb77ed5b10767505cc9328.jpg" width="120" alt="ваниль"></td>
-      <td>Лёгкая сливочная ваниль, нежная и воздушная</td>
-      <td>
-  <a href="forms.html" style="color:#c04; text-decoration:underline;">
-    Заказать
-  </a>
-</td>
+        <!-- Начинка 3 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="filling-card">
+            <img src="https://i.pinimg.com/1200x/e7/e1/b9/e7e1b9c5f4324e0abbc443fd991954fc.jpg" 
+                 class="filling-img" alt="Фисташковая начинка">
+            <h5>Фисташковая</h5>
+            <p>Премиальная фисташка с натуральным ореховым вкусом итальянских орехов.</p>
+            <a href="forms.html" class="btn btn-custom w-100">Заказать</a>
+          </div>
+        </div>
 
-    </tr>
+        <!-- Начинка 4 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="filling-card">
+            <img src="https://i.pinimg.com/736x/08/fd/97/08fd9739bc2b40a401d1937a01800631.jpg" 
+                 class="filling-img" alt="Ягодная начинка">
+            <h5>Ягодная</h5>
+            <p>Свежие ягоды и мягкий крем со вкусом лета из сезонных ягод.</p>
+            <a href="forms.html" class="btn btn-custom w-100">Заказать</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="#top" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-up"></i> К началу
+        </a>
+      </div>
+    </section>
+  </main>
 
-    <tr style="background: rgba(255,255,255,0.7);">
-      <td>Фисташковая</td>
-      <td><img src="https://i.pinimg.com/1200x/e7/e1/b9/e7e1b9c5f4324e0abbc443fd991954fc.jpg" width="120" alt="фисташка"></td>
-      <td>Премиальная фисташка с натуральным ореховым вкусом</td>
-      <td>
-  <a href="forms.html" style="color:#c04; text-decoration:underline;">
-    Заказать
-  </a>
-</td>
+  <!-- Футер -->
+  <footer>
+    <div class="container">
+      <p>© 2023 The Sweet Spot — Кондитерская. Все права защищены.</p>
+      <p>Телефон: +7 (900) 000-00-00 | Email: info@sweet-spot.ru</p>
+      <p>
+        <a href="index.html" class="text-decoration-none text-dark me-3">Главная</a>
+        <a href="about.html" class="text-decoration-none text-dark me-3">О нас</a>
+        <a href="catalog.html" class="text-decoration-none text-dark me-3">Каталог</a>
+        <a href="forms.html" class="text-decoration-none text-dark">Контакты</a>
+      </p>
+    </div>
+  </footer>
 
-    </tr>
-
-    <tr style="background: rgba(255,255,255,0.7);">
-      <td>Ягодная</td>
-      <td><img src="https://i.pinimg.com/736x/08/fd/97/08fd9739bc2b40a401d1937a01800631.jpg" width="120" alt="ягода"></td>
-      <td>Свежие ягоды и мягкий крем со вкусом лета</td>
-      <td>
-  <a href="forms.html" style="color:#c04; text-decoration:underline;">
-    Заказать
-  </a>
-</td>
-
-    </tr>
-  </table>
-
-  <p style="text-align:center; margin-top:12px;">
-    <a href="#top">К началу </a>
-  </p>
-</section>
-
-
-</main>
-
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
+          crossorigin="anonymous"></script>
+          
+  <!-- Плавная прокрутка -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
